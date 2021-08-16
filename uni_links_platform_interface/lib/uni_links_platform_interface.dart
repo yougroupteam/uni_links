@@ -1,6 +1,8 @@
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:uni_links_platform_interface/src/method_channel_uni_links.dart';
 
+import 'src/method_channel_uni_links.dart';
+
 /// The interface that implementations of uni_links must implement.
 ///
 /// Platform implementations should extend this class rather than implement it
@@ -35,7 +37,7 @@ abstract class UniLinksPlatform extends PlatformInterface {
   /// may be null.
   ///
   /// NOTE: base code found in [MethodChannelUniLinks.getInitialLink]
-  Future<String?> getInitialLink() => throw UnimplementedError(
+  Future<String> getInitialLink() => throw UnimplementedError(
       'getInitialLink() has not been implemented on the current platform.');
 
   /// A broadcast stream for receiving incoming link change events.
@@ -43,6 +45,6 @@ abstract class UniLinksPlatform extends PlatformInterface {
   /// The [Stream] emits opened links as [String]s.
   ///
   /// NOTE: base code found in [MethodChannelUniLinks.linkStream]
-  Stream<String?> get linkStream => throw UnimplementedError(
+  Stream<String> get linkStream => throw UnimplementedError(
       'getLinksStream has not been implemented on the current platform.');
 }

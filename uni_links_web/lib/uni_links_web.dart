@@ -13,9 +13,9 @@ class UniLinksPlugin extends UniLinksPlatform {
   final _initialLink = window.location.href;
 
   @override
-  Future<String?> getInitialLink() async => _initialLink;
+  Future<String> getInitialLink() async => _initialLink;
 
   @override
-  Stream<String?> get linkStream => throw UnsupportedError(
+  Stream<String> get linkStream => throw UnsupportedError(
       'As the Web URL cannot be changed without restarting the application, link streams are unimplemented on this platform.');
 }

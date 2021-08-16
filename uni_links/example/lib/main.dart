@@ -16,11 +16,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
-  Uri? _initialUri;
-  Uri? _latestUri;
-  Object? _err;
+  Uri _initialUri;
+  Uri _latestUri;
+  Object _err;
 
-  StreamSubscription? _sub;
+  StreamSubscription _sub;
 
   final _scaffoldKey = GlobalKey();
   final _cmds = getCmds();
@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    _sub?.cancel();
+    _sub.cancel();
     super.dispose();
   }
 
@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     if (!kIsWeb) {
       // It will handle app links while the app is already started - be it in
       // the foreground or in the background.
-      _sub = uriLinkStream.listen((Uri? uri) {
+      _sub = uriLinkStream.listen((Uri uri) {
         if (!mounted) return;
         print('got uri: $uri');
         setState(() {
@@ -104,7 +104,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final queryParams = _latestUri?.queryParametersAll.entries.toList();
+    final queryParams = _latestUri.queryParametersAll.entries.toList();
 
     return Scaffold(
       key: _scaffoldKey,
@@ -171,7 +171,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     );
   }
 
-  Widget _cmdsCard(List<String>? commands) {
+  Widget _cmdsCard(List<String> commands) {
     Widget platformCmds;
 
     if (commands == null) {
@@ -216,25 +216,25 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     print(cmd);
 
     await Clipboard.setData(ClipboardData(text: cmd));
-    ScaffoldMessenger.of(context).showSnackBar(
+    /*ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Copied to Clipboard')),
-    );
+    );*/
   }
 
   void _showSnackBar(String msg) {
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       final context = _scaffoldKey.currentContext;
       if (context != null) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+       /* ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(msg),
-        ));
+        ));*/
       }
     });
   }
 }
 
-List<String>? getCmds() {
-  late final String cmd;
+List<String> getCmds() {
+  String cmd;
   var cmdSuffix = '';
 
   const plainPath = 'path/subpath';
