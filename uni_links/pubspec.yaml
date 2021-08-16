@@ -10,7 +10,7 @@ dependencies:
     git:
       url: git@github.com:yougroupteam/uni_links.git
       path: uni_links_platform_interface/
-      ref: d9939d471f1eaa9ac3b82a3782ae3d16c98048e3
+      ref: 0.6.0
 
 #  uni_links_web: 0.1.0
 
